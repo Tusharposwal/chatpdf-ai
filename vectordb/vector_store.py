@@ -112,4 +112,27 @@ def delete_document_vectors(
     vector_store.delete(
         ids=results["ids"]
     )
-    
+
+
+def is_vector_store_empty():
+    """
+    Check whether Chroma has any vectors.
+    """
+
+    vector_store = get_vector_store()
+
+    results = vector_store.get()
+
+    return len(results["ids"]) == 0
+
+
+def get_total_vectors():
+    """
+    Debug helper.
+    """
+
+    vector_store = get_vector_store()
+
+    results = vector_store.get()
+
+    return len(results["ids"])

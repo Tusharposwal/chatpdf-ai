@@ -2,7 +2,6 @@ import streamlit as st
 import os
 
 
-
 from auth.register import register_user
 from auth.login import login_user
 
@@ -26,7 +25,11 @@ from database.document_manager import (
     delete_document
 )
 
+from database.supabase_storage import upload_file_to_storage
 
+from vectordb.vector_store import is_vector_store_empty
+
+from rag.rebuild_vectors import rebuild_all_vectors
 
 # ---------------- PAGE CONFIG ---------------- #
 
@@ -35,6 +38,17 @@ st.set_page_config(
     page_icon="🤖",
     layout="wide"
 )
+
+
+if "vectors_checked" not in st.session_state:
+
+    st.session_state.vectors_checked = True
+
+    if is_vector_store_empty():
+
+        with st.spinner("Rebuilding vector database..."):
+
+            rebuild_all_vectors()
 
 
 # ---------------- CUSTOM CSS ---------------- #
@@ -559,6 +573,13 @@ if uploaded_file:
             # Save file
             file_path = save_uploaded_file(uploaded_file)
 
+            
+
+            upload_file_to_storage(
+                file_path,
+                uploaded_file.name
+                )
+
             # Extract text
             document_data = route_file(file_path)
 
@@ -797,7 +818,7 @@ if user_question and st.session_state.current_document:
 
             except Exception as e:
                 error_message = str(e)
-                
+
                 if "quota" in error_message.lower():
                     st.error(
             "Gemini API quota exceeded. Please try again later or use a different API key."

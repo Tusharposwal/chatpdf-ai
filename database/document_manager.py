@@ -4,6 +4,7 @@ from vectordb.vector_store import delete_document_vectors
 
 from database.supabase_client import supabase
 
+from database.supabase_storage import delete_file_from_storage
 
 def save_document(user_id, document_name):
     """
@@ -82,6 +83,8 @@ def delete_document(user_id, document_name):
         )
 
         delete_document_vectors(user_id, document_name)
+
+        delete_file_from_storage(document_name)
 
         file_path = os.path.join("uploads", document_name)
 
