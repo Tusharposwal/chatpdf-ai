@@ -1,0 +1,45 @@
+streamlit
+
+# LLM
+google-generativeai
+
+# LangChain
+langchain
+langchain-community
+langchain-core
+langchain-text-splitters
+langchain-chroma
+langchain-huggingface
+
+# Embeddings
+sentence-transformers
+
+# Vector DB
+chromadb
+
+# PDF
+pymupdf
+
+# DOCX
+python-docx
+
+# OCR
+easyocr
+opencv-python-headless
+pillow
+
+# Environment
+python-dotenv
+
+# Utilities
+numpy
+pandas
+
+# Authentication
+bcrypt
+
+# Database
+supabase
+
+qdrant-client
+langchain-qdrant
