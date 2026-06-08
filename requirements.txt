@@ -41,3 +41,5 @@ bcrypt
 # Database
 supabase
 
+# BM25
+rank-bm25
