@@ -39,15 +39,20 @@ st.set_page_config(
     layout="wide"
 )
 
-
+# temporaryfix
 if "vectors_checked" not in st.session_state:
 
     st.session_state.vectors_checked = True
 
-    if is_vector_store_empty():
+    
+    empty = is_vector_store_empty()
+
+    
+
+    if empty:
+        
 
         with st.spinner("Rebuilding vector database..."):
-
             rebuild_all_vectors()
 
 
@@ -573,12 +578,9 @@ if uploaded_file:
             # Save file
             file_path = save_uploaded_file(uploaded_file)
 
-            
-
             upload_file_to_storage(
-                file_path,
-                uploaded_file.name
-                )
+                file_path, uploaded_file.name, st.session_state.user_id
+            )
 
             # Extract text
             document_data = route_file(file_path)

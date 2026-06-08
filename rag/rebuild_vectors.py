@@ -29,7 +29,7 @@ def rebuild_all_vectors():
 
         try:
 
-            download_file_from_storage(document_name, local_path)
+            download_file_from_storage(document_name, local_path, user_id)
 
             document_data = route_file(local_path)
 

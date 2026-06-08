@@ -1,0 +1,15 @@
+venv/
+.env
+
+__pycache__/
+*.pyc
+
+storage/chroma_db/
+uploads/*
+!uploads/.gitkeep
+
+.streamlit/secrets.toml
+
+.DS_Store
+
+storage/chat_history.db

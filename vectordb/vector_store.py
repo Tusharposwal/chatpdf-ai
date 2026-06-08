@@ -115,6 +115,9 @@ def delete_document_vectors(
 
 
 def is_vector_store_empty():
+
+
+
     """
     Check whether Chroma has any vectors.
     """

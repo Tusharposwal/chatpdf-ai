@@ -84,7 +84,7 @@ def delete_document(user_id, document_name):
 
         delete_document_vectors(user_id, document_name)
 
-        delete_file_from_storage(document_name)
+        delete_file_from_storage(document_name, user_id)
 
         file_path = os.path.join("uploads", document_name)
 
