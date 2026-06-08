@@ -41,5 +41,3 @@ bcrypt
 # Database
 supabase
 
-qdrant-client
-langchain-qdrant
