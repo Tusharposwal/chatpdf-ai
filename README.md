@@ -1,5 +1,11 @@
 # 🤖 ChatPDF AI
 
+![Python](https://img.shields.io/badge/Python-3.10+-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-Deployed-red)
+![Gemini](https://img.shields.io/badge/LLM-Google%20Gemini-green)
+![Supabase](https://img.shields.io/badge/Database-Supabase-success)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
 An intelligent multi-document RAG (Retrieval-Augmented Generation) application that allows users to upload PDFs, DOCX files, and scanned documents, then chat with them using Google's Gemini AI.
 
 Built with Streamlit, LangChain, ChromaDB, Supabase, and EasyOCR.
@@ -13,6 +19,20 @@ Built with Streamlit, LangChain, ChromaDB, Supabase, and EasyOCR.
 🔗 **GitHub Repository:** https://github.com/Tusharposwal/chatpdf-ai
 
 ---
+
+# 📸 Application Preview
+
+## Login Page
+
+![Login](screenshots/login.png)
+
+## Workspace Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+## AI Knowledge Chat
+
+![Chat](screenshots/chat.png)
 
 # ✨ Features
 
@@ -245,6 +265,36 @@ streamlit run app.py
 ```
 
 ---
+# 💡 Technical Challenges Solved
+
+### Multi-User Document Isolation
+
+Implemented user-specific storage paths:
+
+```text
+user_13/resume.pdf
+user_14/resume.pdf
+```
+
+to prevent filename collisions across users.
+
+### Automatic Vector Rebuilding
+
+If ChromaDB is reset:
+
+- Documents are downloaded from Supabase Storage
+- Chunks are recreated
+- Embeddings are regenerated
+- Knowledge base is restored automatically
+
+### Hybrid Retrieval
+
+Combined:
+
+- Semantic Search (ChromaDB)
+- BM25 Keyword Search
+
+for improved retrieval quality.
 
 # 🔮 Future Improvements
 
