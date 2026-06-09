@@ -1,6 +1,7 @@
 import fitz
 import numpy as np
-from ingestion.image_ocr import reader
+
+from ingestion.image_ocr import get_reader
 
 
 def extract_text_from_pdf(file_path):
@@ -29,11 +30,12 @@ def extract_text_from_pdf(file_path):
 
                 image = image.reshape(pix.height, pix.width, pix.n)
 
+                reader = get_reader()
+
                 ocr_results = reader.readtext(image, detail=0)
 
                 ocr_text = " ".join(ocr_results)
 
-                # Use OCR text only if OCR found something
                 if ocr_text.strip():
 
                     text = ocr_text
