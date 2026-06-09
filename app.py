@@ -33,28 +33,36 @@ from rag.rebuild_vectors import rebuild_all_vectors
 
 # ---------------- PAGE CONFIG ---------------- #
 
-st.set_page_config(
-    page_title="ChatPDF AI",
-    page_icon="🤖",
-    layout="wide"
-)
+st.set_page_config(page_title="ChatPDF AI", page_icon="🤖", layout="wide")
 
-# temporaryfix
+print("=" * 50)
+print("APP STARTED")
+print("=" * 50)
+
+# temporary fix
+
 if "vectors_checked" not in st.session_state:
 
     st.session_state.vectors_checked = True
 
-    
+    print("VECTOR CHECK STARTED")
+
     empty = is_vector_store_empty()
 
-    
+    print(f"IS EMPTY = {empty}")
 
     if empty:
-        
+
+        print("REBUILD STARTED")
 
         with st.spinner("Rebuilding vector database..."):
             rebuild_all_vectors()
 
+        print("REBUILD FINISHED")
+
+    else:
+
+        print("REBUILD NOT REQUIRED")
 
 # ---------------- CUSTOM CSS ---------------- #
 
