@@ -23,9 +23,7 @@ pymupdf
 # DOCX
 python-docx
 
-# OCR
-easyocr
-opencv-python-headless
+# Image handling
 pillow
 
 # Environment

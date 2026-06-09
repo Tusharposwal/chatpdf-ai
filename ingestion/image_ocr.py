@@ -1,27 +1,26 @@
-import streamlit as st
-import easyocr
+import io
+import google.generativeai as genai
+from PIL import Image
+from utils.config import GEMINI_API_KEY
 
+genai.configure(api_key=GEMINI_API_KEY)
 
-@st.cache_resource
-def get_reader():
-    """
-    Load OCR model only once.
-    """
-    return easyocr.Reader(["en", "hi"], gpu=False)
+_OCR_PROMPT = (
+    "Extract all the text from this image exactly as it appears. "
+    "Return only the raw text with no explanation or formatting."
+)
 
 
 def extract_text_from_image(file_path):
-    """
-    Extract text from image using OCR.
-    """
+    img = Image.open(file_path)
+    model = genai.GenerativeModel("gemini-2.5-flash")
+    response = model.generate_content([_OCR_PROMPT, img])
+    return response.text or ""
 
-    reader = get_reader()
 
-    results = reader.readtext(file_path)
-
-    extracted_text = ""
-
-    for result in results:
-        extracted_text += result[1] + " "
-
-    return extracted_text
+def extract_text_from_pixmap(pix):
+    img_bytes = pix.tobytes("png")
+    img = Image.open(io.BytesIO(img_bytes))
+    model = genai.GenerativeModel("gemini-2.5-flash")
+    response = model.generate_content([_OCR_PROMPT, img])
+    return response.text or ""
